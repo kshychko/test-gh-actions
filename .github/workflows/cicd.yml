@@ -20,7 +20,7 @@ jobs:
       id-token: write
       contents: read
 
-    if:  inputs.environment == 'preproduction_github'
+#    if:  inputs.environment == 'preproduction_github'
 
     environment:
       name: preproduction_github
@@ -40,7 +40,7 @@ jobs:
       id-token: write
       contents: read
 
-    if:  inputs.environment == 'production_github'
+#    if:  inputs.environment == 'production_github'
 
     environment:
       name: production_github
