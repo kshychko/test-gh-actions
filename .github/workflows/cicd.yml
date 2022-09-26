@@ -1,0 +1,51 @@
+name: cicd_pipeline
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: environment
+        description: 'The environment to run the deployment for'
+        required: true
+
+jobs:
+
+  deploy_preproduction:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: deploy_preproduction
+      cancel-in-progress: true
+
+    permissions:
+      id-token: write
+      contents: read
+
+    if:  inputs.environment == 'preproduction_github'
+
+    environment:
+      name: preproduction_github
+    steps:
+
+      - name: Get SHA
+        id: get_workflow_SHA
+        run: echo ${{github.sha}}
+
+  deploy_production:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: deploy_production
+      cancel-in-progress: true
+
+    permissions:
+      id-token: write
+      contents: read
+
+    if:  inputs.environment == 'production_github'
+
+    environment:
+      name: production_github
+    steps:
+
+      - name: Get SHA
+        id: get_workflow_SHA
+        run: echo ${{github.sha}}
