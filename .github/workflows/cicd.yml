@@ -28,7 +28,9 @@ jobs:
 
       - name: Get SHA
         id: get_workflow_SHA
-        run: echo ${{github.sha}}
+        run: |
+          echo ${{github.sha}}
+          echo ${{github.ref}}
 
   deploy_production:
     runs-on: ubuntu-latest
@@ -48,4 +50,6 @@ jobs:
 
       - name: Get SHA
         id: get_workflow_SHA
-        run: echo ${{github.sha}}
+        run: |
+          echo ${{github.sha}} 
+          echo ${{github.ref}} 
